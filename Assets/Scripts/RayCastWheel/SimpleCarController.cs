@@ -12,7 +12,7 @@ public class SimpleCarController : MonoBehaviour
     public float maxPower;
 
     [Header("Wheels")]
-    public CustomWheel[] wheels;
+    public WheelColliderCust[] wheels;
 
     private InputManager im;
 
@@ -41,7 +41,7 @@ public class SimpleCarController : MonoBehaviour
             ackermannAngleRight = 0f;
         }
 
-        foreach(CustomWheel w in wheels)
+        foreach(WheelColliderCust w in wheels)
         {
             if (w.FrontLeft)
                 w.SteerAngle = ackermannAngleLeft;
