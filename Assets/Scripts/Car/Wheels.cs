@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Wheels : MonoBehaviour
 {
-    [SerializeField] private WheelCollider[] wc;
+    //[FL, FR, BL, BR]
+    //[SerializeField] private WheelCollider[] wc;
+    [SerializeField] private WheelColliderCust[] wc;
     private List<int> drivenWheels = new List<int>();
 
     public enum dr
@@ -20,15 +22,15 @@ public class Wheels : MonoBehaviour
 
 
     public List<int> DrivenWheels { get { return drivenWheels; } }
-    public WheelCollider[] WC { get { return wc; } }
+    public WheelColliderCust[] WC { get { return wc; } }
     public dr Drivetrain { get { return drivetrain; } }
-    public float FrontRadius {  get { return wc[0].radius; } }
-    public float RearRadius { get { return wc[2].radius; } }
+    public float FrontRadius {  get { return wc[0].WheelRadius; } }
+    public float RearRadius { get { return wc[2].WheelRadius; } }
 
     // Start is called before the first frame update
     void Start()
     {
-        wc = GetComponentsInChildren<WheelCollider>();
+        wc = GetComponentsInChildren<WheelColliderCust>();
 
         if (drivetrain == dr.FWD || drivetrain == dr.FOURWD)
         {
@@ -46,10 +48,10 @@ public class Wheels : MonoBehaviour
         {
             if (i <= 1)
             {
-                wc[i].radius = inchesToM(wheelRadiusFrontInches);
+                wc[i].WheelRadius = inchesToM(wheelRadiusFrontInches);
             } else
             {
-                wc[i].radius = inchesToM(wheelRadiusRearInches);
+                wc[i].WheelRadius = inchesToM(wheelRadiusRearInches);
             }
         }
 
@@ -65,7 +67,7 @@ public class Wheels : MonoBehaviour
     {
         for(int i = 0; i < torques.Length; i++)
         {
-            wc[i].motorTorque = torques[i];
+            wc[i].MotorTorque = torques[i];
         }
     }
 

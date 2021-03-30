@@ -6,7 +6,7 @@ using System.Collections;
 public class WheelSync : MonoBehaviour
 {
 
-    public WheelCollider wheelC;
+    public WheelColliderCust wheelC;
     private Vector3 wheelCCenter;
     private RaycastHit hit;
 
@@ -16,25 +16,26 @@ public class WheelSync : MonoBehaviour
 
     private void Start()
     {
-        wheelC = transform.parent.GetComponent<WheelCollider>();
+        wheelC = transform.parent.GetComponent<WheelColliderCust>();
     }
 
     void Update()
     {
-        wheelCCenter = wheelC.transform.TransformPoint(wheelC.center);
+        //wheelCCenter = wheelC.transform.TransformPoint(wheelC.centre);
+        wheelCCenter = wheelC.centre;
 
-        if (Physics.Raycast(wheelCCenter, -wheelC.transform.up, out hit, wheelC.suspensionDistance + wheelC.radius))
+        if (Physics.Raycast(wheelCCenter, -wheelC.transform.up, out hit, wheelC.SuspensionDistance + wheelC.WheelRadius))
         {
-            transform.position = hit.point + (wheelC.transform.up * wheelC.radius);
+            transform.position = hit.point + (wheelC.transform.up * wheelC.WheelRadius);
         }
         else
         {
-            transform.position = wheelCCenter - (wheelC.transform.up * wheelC.suspensionDistance);
+            transform.position = wheelCCenter - (wheelC.transform.up * wheelC.SuspensionDistance);
         }
 
         int rotationDirection = flipRotation ? -1 : 1;
 
-        gameObject.transform.Rotate(0, wheelC.rpm / 60 * 360 * rotationDirection * Time.deltaTime, 0);
+        gameObject.transform.Rotate(0, wheelC.RPM / 60 * 360 * rotationDirection * Time.deltaTime, 0);
 
     }
 

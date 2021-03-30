@@ -18,7 +18,7 @@ public class Steering : MonoBehaviour
     {
         for(int i = 0; i < 2; i++)
         {
-            wheels.WC[i].steerAngle = maxTurn * input;
+            wheels.WC[i].SteerAngle = maxTurn * input;
             wheels.WC[i].gameObject.transform.localEulerAngles = new Vector3(0f, maxTurn * input, 0f);
         }
     }

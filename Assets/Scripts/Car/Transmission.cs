@@ -65,8 +65,8 @@ public class Transmission : MonoBehaviour
         float maxRPM = float.MinValue;
         foreach(int i in wheels.DrivenWheels)
         {
-            if (wheels.WC[i].rpm > maxRPM)
-                maxRPM = wheels.WC[i].rpm;
+            if (wheels.WC[i].RPM > maxRPM)
+                maxRPM = wheels.WC[i].RPM;
         }
         return maxRPM * gearRatios[CurrentGear] * finalDrive;
     }

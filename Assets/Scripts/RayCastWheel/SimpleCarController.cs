@@ -24,7 +24,7 @@ public class SimpleCarController : MonoBehaviour
     void Start()
     {
         im = GetComponent<InputManager>();
-        //GetComponent<Rigidbody>().centerOfMass = CM.localPosition;
+        GetComponent<Rigidbody>().centerOfMass = CM.localPosition;
     }
 
     private void Update()

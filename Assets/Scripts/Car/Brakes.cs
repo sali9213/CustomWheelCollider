@@ -31,23 +31,31 @@ public class Brakes : MonoBehaviour
 
         for(int i = 0; i < wheels.WC.Length; i++)
         {
-            if(wheels.WC[i].GetGroundHit(out WheelHit hit))
+            if(i < 2)
             {
-                if (hit.forwardSlip > -wheels.WC[i].forwardFriction.extremumSlip)
-                {
-                    if (i < 2)
-                    {
-                        wheels.WC[i].brakeTorque = frontBrakeTorque;
-                    }
-                    else
-                    {
-                        wheels.WC[i].brakeTorque = rearBrakeTorque;
-                    }
-                } else
-                {
-                    wheels.WC[i].brakeTorque = 0f;
-                }
+                wheels.WC[i].BrakeTorque = frontBrakeTorque;
+            } else
+            {
+                wheels.WC[i].BrakeTorque = rearBrakeTorque;
             }
+
+            //if(wheels.WC[i].GetGroundHit(out WheelHit hit))
+            //{
+            //    if (hit.forwardSlip > -wheels.WC[i].forwardFriction.extremumSlip)
+            //    {
+            //        if (i < 2)
+            //        {
+            //            wheels.WC[i].BrakeTorque = frontBrakeTorque;
+            //        }
+            //        else
+            //        {
+            //            wheels.WC[i].BrakeTorque = rearBrakeTorque;
+            //        }
+            //    } else
+            //    {
+            //        wheels.WC[i].BrakeTorque = 0f;
+            //    }
+            //}
 
         }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(InputManager))]
 [RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(Tyres))]
+//[RequireComponent(typeof(Tyres))]
 [RequireComponent(typeof(Engine))]
 [RequireComponent(typeof(Transmission))]
 [RequireComponent(typeof(Aerodynamics))]
@@ -16,7 +16,7 @@ using UnityEngine;
 public class CarController : MonoBehaviour
 {
     public InputManager im;
-    public Tyres ty;
+    //public Tyres ty;
     public Engine engine;
     public Transmission trans;
     public Aerodynamics aero;
@@ -34,7 +34,7 @@ public class CarController : MonoBehaviour
     {
         im = GetComponent<InputManager>();
         rb = GetComponent<Rigidbody>();
-        ty = GetComponent<Tyres>();
+        //ty = GetComponent<Tyres>();
         engine = GetComponent<Engine>();
         trans = GetComponent<Transmission>();
         aero = GetComponent<Aerodynamics>();
@@ -57,8 +57,13 @@ public class CarController : MonoBehaviour
         float engineTorque = engine.GetTorque(im.throttle);
         float transTorque = trans.GetTorque(engineTorque);
         float[] wheelTorques = diff.DiffOutput(transTorque);
-        float totalEngineBrake = engine.GetEngineBrakeTorque();
-        float[] engineBrake = wheels.GetEngineBraking(totalEngineBrake);
+        float totalEngineBrake;
+        float[] engineBrake = { 0f, 0f, 0f, 0f };
+        if(rb.velocity.magnitude > 10f)
+        {
+            totalEngineBrake = engine.GetEngineBrakeTorque();
+            engineBrake = wheels.GetEngineBraking(totalEngineBrake);
+        }
         brakes.ApplyBrakes(im.brakes, engineBrake);
         steer.ApplySteering(im.steer);
         wheels.ApplyThrottleTorque(wheelTorques);
