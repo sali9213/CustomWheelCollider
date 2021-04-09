@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 public class WheelColliderCust : MonoBehaviour
 {
     private Rigidbody rb;
@@ -144,16 +148,37 @@ public class WheelColliderCust : MonoBehaviour
         }
     }
 
+#if UNITY_EDITOR
+    [ExecuteInEditMode]
     private void OnDrawGizmos()
     {
         if (Application.isPlaying)
         {
             Gizmos.color = Color.red;
+            Handles.color = Color.green;
+
+            Vector3 wheelCentre = transform.position - transform.up * sp.springLength;
+            Vector3 normal = transform.TransformDirection(new Vector3(1, 0, 0));
             Vector3 gizmoTarget = transform.position + (transform.rotation * new Vector3(0, -1, 0)) * (sp.springLength + WheelRadius);
+
             Gizmos.DrawLine(transform.position, gizmoTarget);
             Gizmos.DrawSphere(gizmoTarget, 0.05f);
-            Gizmos.DrawSphere(centre, 0.1f);
+            Handles.DrawWireDisc(wheelCentre, normal, WheelRadius);
+        } else
+        {
+            Gizmos.color = Color.red;
+            Handles.color = Color.green;
+
+            Vector3 wheelCentre = transform.position - transform.up * RestLength;
+            Vector3 normal = transform.TransformDirection(new Vector3(1, 0, 0));
+            Vector3 gizmoTarget = transform.position + (transform.rotation * new Vector3(0, -1, 0)) * (RestLength + WheelRadius);
+
+            Gizmos.DrawLine(transform.position, gizmoTarget);
+            Gizmos.DrawSphere(gizmoTarget, 0.05f);
+            Handles.DrawWireDisc(wheelCentre, normal, WheelRadius);
         }
+        
     }
-    
+#endif
+
 }

@@ -13,7 +13,7 @@ public class Pacejka
     public float autoB2 = 1f;
 
     public float a0 = 1.4f, a1 = 0f, a2 = 1100f, a3 = 1100f, a4 = 10f, a5 = 0f, a6 = 0f, a7 = -2f, a8, a9, a10, a11, a112, a12, a13, a14, a15, a16, a17 = 0f;
-    public float b0 = 1.5f, b1 = 0f, b2 = 1100f, b3 = 0f, b4 = 300, b5 = 0f, b6, b7 = 0f, b8 = -2f, b9, b10, b11, b12, b13 = 0f;
+    public float b0 = 1.5f, b1 = 0f, b2 = 1100f, b3 = 0f, b4 = 300, b5 = 0f, b6, b7 = 0f, b8 = -5f, b9, b10, b11, b12, b13 = 0f;
     public float c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17 = 0f;
 
     float camber = 0f;

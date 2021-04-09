@@ -59,11 +59,13 @@ public class CarController : MonoBehaviour
         float[] wheelTorques = diff.DiffOutput(transTorque);
         float totalEngineBrake;
         float[] engineBrake = { 0f, 0f, 0f, 0f };
+
         if(rb.velocity.magnitude > 10f)
         {
             totalEngineBrake = engine.GetEngineBrakeTorque();
             engineBrake = wheels.GetEngineBraking(totalEngineBrake);
         }
+
         brakes.ApplyBrakes(im.brakes, engineBrake);
         steer.ApplySteering(im.steer);
         wheels.ApplyThrottleTorque(wheelTorques);
