@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Steering : MonoBehaviour
 {
-    Wheels wheels;
+    public float WheelBase;
+    public float TurnRadius;
+    public float RearTrack;
+    private Wheels wheels;
     public float maxTurn = 20f;
 
     // Start is called before the first frame update
@@ -14,12 +17,29 @@ public class Steering : MonoBehaviour
             
     }
 
-    public void ApplySteering(float input)
+    public float[] CalculateSteeringAngle(float input)
     {
-        for(int i = 0; i < 2; i++)
-        {
-            wheels.WC[i].SteerAngle = maxTurn * input;
-            wheels.WC[i].gameObject.transform.localEulerAngles = new Vector3(0f, maxTurn * input, 0f);
+      
+        float ackermannAngleLeft = 0f;
+        float ackermannAngleRight = 0f;
+
+        if (input > 0f)
+        { // is turning right
+            ackermannAngleLeft = Mathf.Rad2Deg * Mathf.Atan(WheelBase / (TurnRadius + (RearTrack / 2))) * input;
+            ackermannAngleRight = Mathf.Rad2Deg * Mathf.Atan(WheelBase / (TurnRadius - (RearTrack / 2))) * input;
         }
+        else if (input < 0f)
+        { // is turning left
+            ackermannAngleLeft = Mathf.Rad2Deg * Mathf.Atan(WheelBase / (TurnRadius - (RearTrack / 2))) * input;
+            ackermannAngleRight = Mathf.Rad2Deg * Mathf.Atan(WheelBase / (TurnRadius + (RearTrack / 2))) * input;
+        }
+        else
+        { // is not turning
+            ackermannAngleLeft = 0f;
+            ackermannAngleRight = 0f;
+        }
+
+        return new float[] { ackermannAngleLeft, ackermannAngleRight };
+
     }
 }

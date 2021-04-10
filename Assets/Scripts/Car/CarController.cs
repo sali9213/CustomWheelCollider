@@ -67,7 +67,7 @@ public class CarController : MonoBehaviour
         }
 
         brakes.ApplyBrakes(im.brakes, engineBrake);
-        steer.ApplySteering(im.steer);
+        wheels.ApplySteering(steer.CalculateSteeringAngle(im.steer));
         wheels.ApplyThrottleTorque(wheelTorques);
        
         // Apply aero drag

@@ -27,7 +27,8 @@ public class WheelColliderCust : MonoBehaviour
     public float SpringTravel;
     public float SpringStiffness;
     public float DamperStiffness;
-
+    [SerializeField]
+    private float SpringForce;
     private Vector3 suspensionForce;
     private Vector3 wheelVelocityLS;
 
@@ -40,8 +41,9 @@ public class WheelColliderCust : MonoBehaviour
     public float WheelMass;
 
     private float slipRatio;
-    private float slipAngle;
+    public float slipAngle { get; private set; }
     private float tractionForce;
+    [SerializeField]
     private float tractionTorque;
     private float totalTorque;
     private float wheelInertia;
@@ -49,10 +51,11 @@ public class WheelColliderCust : MonoBehaviour
     private float angularVelocity;
     private Vector2 wheelVel;
     private Vector2 forward = new Vector2(0f, 1f);
+    [SerializeField]
     private float Fx;
+    [SerializeField]
     private float Fy;
-    //public float RPM { get; private set; }
-    public float RPM;
+    public float RPM { get; private set; }
 
     // Start is called before the first frame update
     void Start()
@@ -73,7 +76,8 @@ public class WheelColliderCust : MonoBehaviour
     void FixedUpdate()
     {
         if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hit, sp.maxLength + WheelRadius)) {
-            suspensionForce = sp.CalculateSuspensionForce(hit, WheelRadius) * hit.normal;
+            float suspensionForceMag = sp.CalculateSuspensionForce(hit, WheelRadius);
+            suspensionForce = suspensionForceMag * hit.normal;
 
             wheelVelocityLS = transform.InverseTransformDirection(rb.GetPointVelocity(hit.point));
             wheelVel = new Vector2(wheelVelocityLS.x, wheelVelocityLS.z);
@@ -81,14 +85,15 @@ public class WheelColliderCust : MonoBehaviour
             tractionTorque = tractionForce * WheelRadius;
             totalTorque = MotorTorque - tractionTorque;
 
-            if (wheelVelocityLS.magnitude < 10f)
+            if (wheelVelocityLS.magnitude <5f)
             {
                 Fy = wheelVelocityLS.x * sp.springForce;
+                SpringForce = sp.springForce;
                 //Fx = totalTorque * WheelRadius * sp.springForce/1000f;
             } else
             {
                 slipAngle = Vector2.Angle(forward, wheelVel) * Mathf.Sign(wheelVel.x);
-                Fy = pk.CalcLateralF(sp.springForce / 1000f, slipAngle, 0f);
+                Fy = pk.CalcLateralF(suspensionForceMag / 1000f, slipAngle, 0f);
             }
 
             slipRatio = (((angularVelocity * WheelRadius) - wheelVel.y) / Mathf.Abs(wheelVel.y)) * 100;
@@ -129,7 +134,14 @@ public class WheelColliderCust : MonoBehaviour
                 Fx = 0; 
             }
 
-            tractionForce = Fx;
+            if (angularVelocity == 0f && BrakeTorque != 0f)
+            {
+                tractionForce = 0f;
+            }
+            else
+            {
+                tractionForce = Fx;
+            }
 
             Debug.DrawLine(hit.point, hit.point + transform.TransformDirection(new Vector3(wheelVel.x, 0f, wheelVel.y)));
 

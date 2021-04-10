@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1184694603435928590}
-  - component: {fileID: 1184694603435928589}
   m_Layer: 0
   m_Name: FL
   m_TagString: Untagged
@@ -30,38 +29,8 @@ Transform:
   m_Children:
   - {fileID: 6802151943649134618}
   m_Father: {fileID: 1184694604541541321}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!146 &1184694603435928589
-WheelCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1184694603435928591}
-  m_Center: {x: 0, y: 0, z: 0}
-  m_Radius: 0.34
-  m_SuspensionSpring:
-    spring: 35000
-    damper: 4500
-    targetPosition: 0.5
-  m_SuspensionDistance: 0.3
-  m_ForceAppPointDistance: 0
-  m_Mass: 20
-  m_WheelDampingRate: 0.25
-  m_ForwardFriction:
-    m_ExtremumSlip: 0.4
-    m_ExtremumValue: 1
-    m_AsymptoteSlip: 0.8
-    m_AsymptoteValue: 0.5
-    m_Stiffness: 1
-  m_SidewaysFriction:
-    m_ExtremumSlip: 0.2
-    m_ExtremumValue: 1
-    m_AsymptoteSlip: 0.5
-    m_AsymptoteValue: 0.75
-    m_Stiffness: 1
-  m_Enabled: 1
 --- !u!1 &1184694604198450765
 GameObject:
   m_ObjectHideFlags: 0
@@ -122,7 +91,7 @@ Transform:
   m_Children:
   - {fileID: 6802151942899738676}
   m_Father: {fileID: 1184694604541541321}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!146 &1184694604403012280
 WheelCollider:
@@ -165,7 +134,6 @@ GameObject:
   - component: {fileID: 1184694604541541321}
   - component: {fileID: 1184694604541541320}
   - component: {fileID: 1184694604541541333}
-  - component: {fileID: 1184694604541541334}
   - component: {fileID: 1184694604541541335}
   - component: {fileID: 1184694604541541328}
   - component: {fileID: 1184694604541541329}
@@ -196,10 +164,10 @@ Transform:
   - {fileID: 1184694605087262753}
   - {fileID: 1184694604198450764}
   - {fileID: 1184694605301262108}
-  - {fileID: 1184694603435928590}
   - {fileID: 1184694604968556515}
-  - {fileID: 1184694604935827954}
+  - {fileID: 1184694603435928590}
   - {fileID: 1184694604403012281}
+  - {fileID: 1184694604935827954}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -235,27 +203,6 @@ MonoBehaviour:
   steer: 0
   brakes: 0
   clutch: 0
---- !u!114 &1184694604541541334
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1184694604541541322}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 603893f3bfa194f3abce3a67b5163095, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  frontTyreGrip: 1
-  rearTyreGrip: 1
-  rollingResistanceConstant: 0
-  frontWheels:
-  - {fileID: 1184694604935827953}
-  - {fileID: 1184694604403012280}
-  rearWheels:
-  - {fileID: 1184694603435928589}
-  - {fileID: 1184694604968556514}
 --- !u!114 &1184694604541541335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -431,7 +378,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   im: {fileID: 0}
-  ty: {fileID: 0}
   engine: {fileID: 0}
   trans: {fileID: 0}
   aero: {fileID: 0}
@@ -472,7 +418,7 @@ Transform:
   m_Children:
   - {fileID: 6802151944422496234}
   m_Father: {fileID: 1184694604541541321}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!146 &1184694604935827953
 WheelCollider:
@@ -534,7 +480,7 @@ Transform:
   m_Children:
   - {fileID: 6802151944454297841}
   m_Father: {fileID: 1184694604541541321}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!146 &1184694604968556514
 WheelCollider:
@@ -685,8 +631,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1184694605301262109}
-  m_LocalRotation: {x: 0.19752473, y: -0, z: -0, w: 0.9802979}
-  m_LocalPosition: {x: 0, y: 3, z: -4.761418}
+  m_LocalRotation: {x: 0.12224847, y: -0, z: -0, w: 0.99249953}
+  m_LocalPosition: {x: 0, y: 3, z: -7.9955344}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1184694604541541321}

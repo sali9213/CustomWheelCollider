@@ -91,4 +91,13 @@ public class Wheels : MonoBehaviour
 
         return engineBrakeTorque;
     }
+
+    public void ApplySteering(float[] angles)
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            wc[i].SteerAngle = angles[i];
+            wc[i].gameObject.transform.localEulerAngles = new Vector3(0f, angles[i], 0f);
+        }
+    }
 }

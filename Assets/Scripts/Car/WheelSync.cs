@@ -16,7 +16,7 @@ public class WheelSync : MonoBehaviour
 
     private void Start()
     {
-        wheelC = transform.parent.GetComponent<WheelColliderCust>();
+        //wheelC = transform.parent.GetComponent<WheelColliderCust>();
     }
 
     void Update()
@@ -35,7 +35,8 @@ public class WheelSync : MonoBehaviour
 
         int rotationDirection = flipRotation ? -1 : 1;
 
-        gameObject.transform.Rotate(0, wheelC.RPM / 60 * 360 * rotationDirection * Time.deltaTime, 0);
+        transform.rotation = wheelC.transform.rotation;
+        gameObject.transform.Rotate(wheelC.RPM / 60 * 360 * rotationDirection * Time.deltaTime, 0, 0);
 
     }
 
